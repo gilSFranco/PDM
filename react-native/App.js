@@ -1,14 +1,11 @@
 import { SafeAreaView, StyleSheet } from 'react-native';
 
-import CustomBanner from './components/Banner/CustomBanner';
-import CustomAvatar from './components/Avatar/CustomAvatar'
-import CustomBottomAppBar from './components/AppBar/CustomBottomAppBar';
+import Cat from './components/Cat/Cat';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <CustomAvatar />
-      <CustomBottomAppBar />
+      <Cat name="Bichano" />
     </SafeAreaView>
   );
 }
