@@ -1,31 +1,112 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
-import Number from './components/Buttons/Numbers';
-import Operations from './components/Buttons/Operations';
-import Input from './components/Input/Input';
+import { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function App() {
+  const [expression, setExpression] = useState('');
+  const [count, setCount] = useState(0)
+
+  const handleOperations = (value) => {
+    if(value == "=") {
+      setCount(eval(expression));
+    }
+
+    setCount(antvalue => antvalue + value);
+  }
+
   return (
     <View style={styles.container}>
-      <Input />
-      <Number numero={1} />
-      <Number numero={2} />
-      <Number numero={3} />
-      <Operations operacao="+" />
+      <View
+          style={styles.input}
+      >
+          <Text style={styles.textInputUp}>{expression}</Text>
+          <Text style={styles.textInputDown}>{count}</Text>
+      </View>
 
-      <Number numero={4} />
-      <Number numero={5} />
-      <Number numero={6} />
-      <Operations operacao="-" />
+      <TouchableOpacity 
+          onPress={() => handleOperations('7')}
+          style={styles.button}
+      >
+          <Text style={styles.text}>7</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>8</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>9</Text>
+      </TouchableOpacity>
 
-      <Number numero={7} />
-      <Number numero={8} />
-      <Number numero={9} />
-      <Operations operacao="*" />
+      <TouchableOpacity
+          onPress={() => handleOperations('+')}
+          style={styles.button}
+        >
+          <Text style={styles.text}>+</Text>
+      </TouchableOpacity>
 
-      <Operations operacao="=" />
-      <Operations operacao="/" />
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>4</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>5</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>6</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+            style={styles.button}
+        >
+          <Text style={styles.text}>-</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>1</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>2</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>3</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+            style={styles.button}
+        >
+          <Text style={styles.text}>*</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+          onPress={() => handleOperations('=')}
+          style={styles.buttonEqual}
+        >
+          <Text style={styles.text}>=</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+          style={styles.button}
+      >
+          <Text style={styles.text}>0</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+            style={styles.button}
+        >
+          <Text style={styles.text}>/</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -41,4 +122,47 @@ const styles = StyleSheet.create({
     gap: 5,
     flexWrap: "wrap"
   },
+  input: {
+    width: "98%",
+    height: 50,
+    borderRadius: 5,
+    backgroundColor: "#FFF",
+    paddingLeft: 10,
+    marginBottom: 100
+  },
+  button: {
+    width: 80,
+    height: 80,
+    borderRadius: 5,
+    backgroundColor: "#DEDEDE",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonEqual: {
+        width: 165,
+        height: 80,
+        borderRadius: 5,
+        backgroundColor: "#DEDEDE",
+        alignItems: "center",
+        justifyContent: "center"
+  },
+  text: {
+      fontSize: 24,
+      fontWeight: "500",
+      color: "#000000"
+  },
+  textInputDown: {
+      fontSize: 40,
+      fontWeight: "500",
+      color: "#000000",
+      textAlign: "right",
+      marginRight: 10
+  },
+  textInputUp: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: "#000000",
+    textAlign: "right",
+    marginRight: 10
+}
 });

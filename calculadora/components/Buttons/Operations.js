@@ -1,18 +1,28 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const Operations = props => {
     return(
-        <View 
-            style={styles.button}
+        <TouchableOpacity
+            style={
+                props.isEqual ? styles.buttonEqual : styles.button
+            }
         >
             <Text style={styles.text}>{props.operacao}</Text>
-        </View>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     button: {
         width: 80,
+        height: 80,
+        borderRadius: 5,
+        backgroundColor: "#DEDEDE",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    buttonEqual: {
+        width: 165,
         height: 80,
         borderRadius: 5,
         backgroundColor: "#DEDEDE",
