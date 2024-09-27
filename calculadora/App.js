@@ -4,13 +4,32 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 export default function App() {
   const [expression, setExpression] = useState('');
   const [count, setCount] = useState(0)
+  let [numbers, setNumbers] = useState([])
 
   const handleOperations = (value) => {
-    if(value == "=") {
-      setCount(eval(expression));
+    switch(value) {
+        case "=":
+            setCount(eval(expression));
+        case "+":
+            setCount([...numbers])
+        case "-":
+            setCount([...numbers])
+        case "*":
+            setCount([...numbers])
+        case "/":
+            setCount([...numbers])
     }
 
-    setCount(antvalue => antvalue + value);
+    setExpression(antvalue => antvalue + value);
+  }
+
+  const handleNumbers = (number) => {
+    setCount(antvalue => antvalue + number);
+
+    let value = parseInt(number)
+    numbers.push(value);
+
+    console.log(numbers);
   }
 
   return (
@@ -22,8 +41,26 @@ export default function App() {
           <Text style={styles.textInputDown}>{count}</Text>
       </View>
 
+      <TouchableOpacity
+          onPress={
+            () => {
+                setCount(0)
+                setExpression('')
+                setNumbers([])
+            }
+          }
+          style={styles.buttonEqual}
+        >
+          <Text style={styles.text}>C</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+          style={styles.buttonEqual}
+        >
+          <Text style={styles.text}>Apagar</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity 
-          onPress={() => handleOperations('7')}
+          onPress={() => handleNumbers('7')}
           style={styles.button}
       >
           <Text style={styles.text}>7</Text>
