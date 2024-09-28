@@ -2,42 +2,73 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function App() {
-  const [expression, setExpression] = useState('');
+  const [placeholder, setPlaceholder] = useState('')
+  const [expression, setExpression] = useState('')
+
   const [count, setCount] = useState(0)
   let [numbers, setNumbers] = useState([])
 
   const handleOperations = (value) => {
+    setExpression(previous => previous + value)
+
     switch(value) {
         case "=":
+            setPlaceholder(expression + "=")
             setCount(eval(expression));
+            break;
         case "+":
-            setCount([...numbers])
+            console.log("+");
+            setPlaceholder(expression)
+
+            setCount(0)
+            setNumbers([])
+            break;
         case "-":
-            setCount([...numbers])
+            console.log("-");
+            setPlaceholder(expression)
+
+            setCount(0)
+            setNumbers([])
+            break;
         case "*":
-            setCount([...numbers])
+            console.log("*");
+            setPlaceholder(expression)
+
+            setCount(0)
+            setNumbers([])
+            break;
         case "/":
+            console.log("/");
+            setPlaceholder(expression)
+
+            setCount(0)
+            setNumbers([])
+            break;
+        default:
+            handleNumbers(value);
             setCount([...numbers])
     }
-
-    setExpression(antvalue => antvalue + value);
   }
 
   const handleNumbers = (number) => {
-    setCount(antvalue => antvalue + number);
-
     let value = parseInt(number)
     numbers.push(value);
 
     console.log(numbers);
   }
 
+  const eraseLastNumber = () => {
+    numbers.splice(numbers.length - 1, 1)
+    console.log(numbers)
+    setCount([...numbers])
+  } 
+
   return (
     <View style={styles.container}>
       <View
           style={styles.input}
       >
-          <Text style={styles.textInputUp}>{expression}</Text>
+          <Text style={styles.textInputUp}>{placeholder}</Text>
           <Text style={styles.textInputDown}>{count}</Text>
       </View>
 
@@ -46,6 +77,7 @@ export default function App() {
             () => {
                 setCount(0)
                 setExpression('')
+                setPlaceholder('')
                 setNumbers([])
             }
           }
@@ -54,23 +86,26 @@ export default function App() {
           <Text style={styles.text}>C</Text>
       </TouchableOpacity>
       <TouchableOpacity
+          onPress={eraseLastNumber}
           style={styles.buttonEqual}
         >
           <Text style={styles.text}>Apagar</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
-          onPress={() => handleNumbers('7')}
+          onPress={() => handleOperations('7')}
           style={styles.button}
       >
           <Text style={styles.text}>7</Text>
       </TouchableOpacity>
-      <TouchableOpacity 
+      <TouchableOpacity
+          onPress={() => handleOperations('8')}
           style={styles.button}
       >
           <Text style={styles.text}>8</Text>
       </TouchableOpacity>
-      <TouchableOpacity 
+      <TouchableOpacity
+          onPress={() => handleOperations('9')}
           style={styles.button}
       >
           <Text style={styles.text}>9</Text>
@@ -83,45 +118,53 @@ export default function App() {
           <Text style={styles.text}>+</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity
+          onPress={() => handleOperations('4')}
           style={styles.button}
       >
           <Text style={styles.text}>4</Text>
       </TouchableOpacity>
       <TouchableOpacity 
+          onPress={() => handleOperations('5')}
           style={styles.button}
       >
           <Text style={styles.text}>5</Text>
       </TouchableOpacity>
       <TouchableOpacity 
+          onPress={() => handleOperations('6')}
           style={styles.button}
       >
           <Text style={styles.text}>6</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
+            onPress={() => handleOperations('-')}
             style={styles.button}
         >
           <Text style={styles.text}>-</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
+          onPress={() => handleOperations('1')}
           style={styles.button}
       >
           <Text style={styles.text}>1</Text>
       </TouchableOpacity>
       <TouchableOpacity 
+          onPress={() => handleOperations('2')}
           style={styles.button}
       >
           <Text style={styles.text}>2</Text>
       </TouchableOpacity>
-      <TouchableOpacity 
+      <TouchableOpacity
+          onPress={() => handleOperations('3')}
           style={styles.button}
       >
           <Text style={styles.text}>3</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
+            onPress={() => handleOperations('*')}
             style={styles.button}
         >
           <Text style={styles.text}>*</Text>
@@ -133,13 +176,15 @@ export default function App() {
           <Text style={styles.text}>=</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity
+          onPress={() => handleOperations('0')}
           style={styles.button}
       >
           <Text style={styles.text}>0</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
+            onPress={() => handleOperations('/')}
             style={styles.button}
         >
           <Text style={styles.text}>/</Text>
