@@ -1,0 +1,10 @@
+#! /bin/bash
+echo "Qual sera o nome da pasta?"
+read pasta
+mkdir "$pasta"
+echo "Pasta $pasta criada com sucesso."
+echo "Espere..."
+echo "Compactando a pasta $pasta para $pasta.tar.gz..."
+tar -czf "$pasta.tar.gz" "$pasta"
+echo "Pasta $pasta compactada com sucesso para $pasta.tar.gz."
+echo
